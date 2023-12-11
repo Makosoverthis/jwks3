@@ -1,0 +1,18 @@
+# Assuming you have a function to encrypt and decrypt using AES
+def encrypt_data(data, key, iv):
+    # Implementation of AES encryption
+    # ...
+
+def decrypt_data(encrypted_data, key, iv):
+    # Implementation of AES decryption
+    # ...
+
+# Load encryption key and IV from environment variables securely
+encryption_key = os.getenv("NOT_MY_KEY")
+encryption_iv = os.getenv("RANDOM_IV")
+
+# Ensure secure storage of encryption key and IV, possibly in a dedicated secure storage service
+# Example usage:
+private_key = "sensitive_data"
+encrypted_private_key = encrypt_data(private_key, encryption_key, encryption_iv)
+# Save encrypted_private_key and encryption_iv in the database securely
