@@ -1,0 +1,31 @@
+# Assuming you have a User model and a database connection
+from your_database_module import Database, User
+import uuid
+from argon2 import PasswordHasher
+
+db = Database()  # Assuming you have a database connection
+
+# Implementation of password hashing with Argon2
+password_hasher = PasswordHasher()
+
+# API endpoint for user registration
+@app.route('/register', methods=['POST'])
+def register_user():
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+
+    # Generate a secure password using UUIDv4
+    generated_password = str(uuid.uuid4())
+
+    # Hash the password using Argon2 securely
+    hashed_password = password_hasher.hash(generated_password)
+
+    # Create a new user
+    new_user = User(username=username, password_hash=hashed_password, email=email)
+
+    # Save the new user to the database securely
+    db.save_user(new_user)
+
+    # Return the generated password to the user securely
+    return jsonify({'password': generated_password}), 201
